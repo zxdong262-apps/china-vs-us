@@ -1,0 +1,85 @@
+//- Main Index Template
+doctype html
+html(lang=currentLocale, prefix='og: http://ogp.me/ns# website: http://ogp.me/ns/website#')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content=locale.site.description)
+    meta(name='keywords', content='China, United States, statistics, population, economy, energy, GDP, comparison, data, 中国, 美国, 统计数据, 经济, 人口')
+    meta(name='author', content='China vs United States')
+    meta(name='robots', content='index, follow')
+    meta(name='googlebot', content='index, follow')
+    
+    //- Canonical URL
+    link(rel='canonical', href=canonicalUrl)
+    
+    //- Alternate links for internationalization
+    link(rel='alternate', hreflang='en', href=enUrl)
+    link(rel='alternate', hreflang='zh-CN', href=zhCnUrl)
+    link(rel='alternate', hreflang='x-default', href=enUrl)
+    
+    //- Open Graph Meta Tags
+    meta(property='og:type', content='website')
+    meta(property='og:url', content=canonicalUrl)
+    meta(property='og:title', content=locale.site.title)
+    meta(property='og:description', content=locale.site.description)
+    meta(property='og:site_name', content='China vs United States')
+    meta(property='og:locale', content=currentLocale === 'en_US' ? 'en_US' : currentLocale)
+    
+    //- Twitter Card Meta Tags
+    meta(name='twitter:card', content='summary_large_image')
+    meta(name='twitter:title', content=locale.site.title)
+    meta(name='twitter:description', content=locale.site.description)
+    
+    //- Theme Color
+    meta(name='theme-color', content='#2563eb')
+    
+    title= locale.site.title
+    link(rel='stylesheet', href='/css/style.css')
+    link(rel='icon', type='image/svg+xml', href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🌏</text></svg>')
+    
+    //- Structured Data (JSON-LD)
+    script(type='application/ld+json')
+      | !{JSON.stringify(jsonLd)}
+    
+    script.
+      // Set default locale before page loads
+      var currentLocale = "#{currentLocale}";
+  body
+    canvas#bg-canvas
+    
+    //- Include Header
+    include header
+    
+    main.main-content(role='main')
+      .container
+        //- Hero Section
+        section.hero(aria-labelledby='hero-title')
+          .hero-content
+            h1#hero-title.hero-title= locale.header.title
+            p.hero-subtitle= locale.header.subtitle
+            p.hero-description= locale.site.description
+        
+        //- Data Table Section
+        include data-table
+        
+        //- Share Section
+        include share-section
+        
+        //- FAQ Section - AI-friendly structured content
+        include faq-section
+    
+    //- Include Footer
+    include footer
+
+    //- Include Footer JS
+    include footer-js
+    
+    script.
+      // Set URL text in table header
+      var urlText = document.querySelector('.url-text');
+      if (urlText) {
+        urlText.textContent = window.location.href;
+      }
+    
+script(src='/js/background.js')

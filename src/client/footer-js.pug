@@ -1,0 +1,94 @@
+script(async=true, src='https://www.googletagmanager.com/gtag/js?id=G-0FRVEJZ2Z2')
+script(async=true, src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3871790631789822' crossorigin='anonymous')
+script.
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0FRVEJZ2Z2');
+
+// AddToAny Share Buttons
+script.
+  var a2a_config = a2a_config || {};
+  a2a_config.num_services = 6;
+script(async=true, src='https://static.addtoany.com/menu/page.js')
+
+// Download table as image (only load html2canvas in dev mode when buttons exist)
+script.
+  document.addEventListener('DOMContentLoaded', function() {
+    var downloadTableBtnTop = document.getElementById('downloadTableBtnTop');
+    var downloadTableBtn = document.getElementById('downloadTableBtn');
+    var dataTableSection = document.getElementById('table');
+    
+    // Only set up download functionality if buttons exist (dev mode)
+    if (!downloadTableBtnTop && !downloadTableBtn) {
+      return;
+    }
+    
+    // Load html2canvas on-demand (dev mode only)
+    var html2canvasScript = document.createElement('script');
+    html2canvasScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+    html2canvasScript.onload = function() {
+      attachClickHandlers();
+    };
+    document.head.appendChild(html2canvasScript);
+    
+    function attachClickHandlers() {
+      function downloadTableAsImage() {
+        if (!dataTableSection || typeof html2canvas === 'undefined') {
+          console.error('Table section or html2canvas not found');
+          return;
+        }
+
+        html2canvas(dataTableSection, {
+          backgroundColor: '#ffffff',
+          scale: 2
+        }).then(function(canvas) {
+
+          // Create download link
+          var link = document.createElement('a');
+          link.download = 'china-vs-rest-of-world-' + currentLocale + '.png';
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+        }).catch(function(error) {
+          console.error('Error capturing table:', error);
+        });
+      }
+      
+      if (downloadTableBtnTop) {
+        downloadTableBtnTop.addEventListener('click', downloadTableAsImage);
+      }
+      if (downloadTableBtn) {
+        downloadTableBtn.addEventListener('click', downloadTableAsImage);
+      }
+    }
+  });
+
+// Generate QR code dynamically in dev mode
+script.
+  document.addEventListener('DOMContentLoaded', function() {
+    var qrCodeDev = document.getElementById('qr-code-wrap');
+    if (!qrCodeDev) {
+      return;
+    }
+
+    var qrCodeDevImg = document.getElementById('qrcode-dev');
+    if (qrCodeDevImg) {
+      qrCodeDevImg.remove();
+    }
+    // Load qrcode library on-demand
+    var qrcodeScript = document.createElement('script');
+    qrcodeScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+    qrcodeScript.onload = function() {
+      // Generate QR code for current URL
+      new QRCode(qrCodeDev, {
+        text: window.location.href,
+        width: 60,
+        height: 60,
+        colorDark: '#000000',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.L
+      });
+    };
+    document.head.appendChild(qrcodeScript);
+  });

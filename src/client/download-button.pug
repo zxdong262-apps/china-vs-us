@@ -1,0 +1,9 @@
+//- Download Button Component
+//- Usage: include download-button.pug
+//- Required variables: isProduction, currentLocale, locale
+//- Optional: buttonId (for dev mode to attach click handler)
+if isProduction
+  - var imageName = currentLocale === 'en_US' ? 'china-vs-rest-of-world.png' : 'china-vs-rest-of-world-' + currentLocale + '.png'
+  a.btn-download(href='/images/' + imageName, download, target='_blank', aria-label=locale.dataTable.downloadImage, class=btnClass)= locale.dataTable.downloadImage
+else
+  button.btn-download(id=buttonId, aria-label=locale.dataTable.downloadImage, class=btnClass)= locale.dataTable.downloadImage

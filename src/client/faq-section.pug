@@ -1,0 +1,11 @@
+//- FAQ Section Component - AI-friendly structured content
+section.faq-section(aria-labelledby='faq-title')
+  h2#faq-title.section-title= locale.faq.title
+  .faq-container(itemscope, itemtype='https://schema.org/FAQPage')
+    each qa in locale.faq.questions
+      .faq-item(itemscope, itemprop='mainEntity', itemtype='https://schema.org/Question')
+        h3.faq-question(itemprop='name')= qa.question
+        .faq-answer(itemscope, itemprop='acceptedAnswer', itemtype='https://schema.org/Answer')
+          p(itemprop='text')= qa.answer
+          if qa.url
+            a.faq-link(href=qa.url, target='_blank', rel='noopener external', aria-label='Learn more')= qa.url

@@ -1,0 +1,47 @@
+{
+  "name": "china-vs-us",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node src/server/index.js",
+    "build": "node build/scripts/build.js",
+    "build:images": "PORT=8081 node build/scripts/generate-image.js",
+    "server": "node src/server/prod.js",
+    "clean": "rm -rf public",
+    "test": "node --test test/integration.test.js",
+    "test:dev": "node --test test/dev-server.test.js"
+  },
+  "description": "A static website showing data comparisons between China and United States",
+  "keywords": [
+    "china",
+    "united-states",
+    "statistics",
+    "world-bank",
+    "imf",
+    "data-visualization"
+  ],
+  "homepage": "https://github.com/zxdong262-apps/china-vs-us#readme",
+  "bugs": {
+    "url": "https://github.com/zxdong262-apps/china-vs-us/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zxdong262-apps/china-vs-us.git"
+  },
+  "license": "MIT",
+  "author": "ZHAO Xudong <zxdong@gmail.com>",
+  "type": "module",
+  "main": "src/server/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "express": "^5.2.1",
+    "fs-extra": "^11.3.4",
+    "pug": "^3.0.3",
+    "puppeteer": "^23.0.0",
+    "qrcode": "^1.5.4"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

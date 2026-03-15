@@ -1,0 +1,36 @@
+//- Footer Component
+footer.footer
+  .container
+    .footer-content
+      .footer-section
+        h3= locale.footer.title
+        ul.footer-links
+          each source, key in data.links.dataSources
+            li
+              a(href=source.url, target='_blank', rel='noopener external', aria-label=source.name + ' (opens in new tab)')= source.name
+      .footer-section
+        h3= locale.nav.about
+        p.footer-description= locale.about.description
+        p.footer-description= locale.about.purpose
+      .footer-section
+        h3= locale.footer.tools
+        ul.footer-links
+          each source, key in data.links.tools
+            li
+              a(href=source.url, target='_blank', rel='noopener external', aria-label=source.name + ' (opens in new tab)')= source.name
+      .footer-section
+        h3= locale.footer.project
+        ul.footer-links
+          each source, key in data.links.project
+            li
+              a(href=source.url, target='_blank', rel='noopener external', aria-label=source.name + ' (opens in new tab)')= source.name
+      .footer-section
+        h3= locale.nav.language
+        ul.footer-links
+          li
+            a(href='/', hreflang='en', lang='en', aria-label='English') English
+          li
+            a(href='/zh_CN', hreflang='zh-CN', lang='zh-CN', aria-label='中文') 中文
+    .footer-bottom
+      p= locale.footer.disclaimer
+      p &copy; 2024 China vs United States. #{locale.footer.copyright}

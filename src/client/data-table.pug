@@ -1,0 +1,55 @@
+//- Data Table Section
+section#data-table.section(aria-labelledby='data-table-title')
+  h2#data-table-title.section-title
+    span= locale.dataTable.dataTable
+    - var buttonId = 'downloadTableBtnTop'
+    - var btnClass = 'download-btn-top'
+    include download-button
+  .table-container
+    table.data-table#table(role='table', aria-describedby='table-desc')
+      caption.sr-only#table-desc Statistical comparison data between China and United States
+      thead
+        tr
+          th#tableUrl.table-header-url(colspan=6, scope='colgroup')
+            .url-qr-container
+              if isProduction
+                - var qrCodeName = currentLocale === 'en_US' ? 'qrcode-china-vs-us.png' : 'qrcode-china-vs-us-' + currentLocale + '.png'
+                img.qr-code(src='/images/' + qrCodeName, alt='QR Code')
+              else
+                #qr-code-wrap
+                  img.qr-code#qrcode-dev(alt='QR Code')
+              span.url-text
+        tr
+          th(scope='col')= locale.dataTable.category || 'Category'
+          th(scope='col')= locale.regions.china
+          th(colspan=2, scope='colgroup')= locale.regions.china + ' %'
+          th(scope='col')= locale.regions.us
+          th(scope='col')= locale.dataTable.year || 'Year'
+      tbody
+        each item in dataItems
+          - const itemData = getDataByPath(data, item.path);
+          - const itemLabel = locale.data[item.key];
+          - const chinaPercent = Math.round(itemData.china / (itemData.china + itemData.us) * 100);
+          - const usPercent = 100 - chinaPercent;
+          tr
+            th(scope='row').category
+              span #{item.icon} #{itemLabel}
+              span.unit-label  (#{locale.units[itemData.unit] || itemData.unit})
+            td.china
+              - const chinaValue = itemData.china
+              - const chinaGDP = itemData.militaryBudgetInGDPPercentage ? itemData.militaryBudgetInGDPPercentage.china + '% GDP' : ''
+              - const chinaSuffix = chinaGDP ? '(' + chinaGDP + ')' : ''
+              span.value= chinaValue + chinaSuffix
+            td(colspan=2)
+              .percent-bar-container
+                .percent-bar.china-bar(style='width:' + chinaPercent + '%')
+                .percent-bar.us-bar(style='width:' + usPercent + '%')
+            td
+              - const usValue = itemData.us
+              - const usGDP = itemData.militaryBudgetInGDPPercentage ? itemData.militaryBudgetInGDPPercentage.us + '% GDP' : ''
+              - const usSuffix = usGDP ? '(' + usGDP + ')' : ''
+              span.value= usValue + usSuffix
+            td= itemData.year
+  .download-section
+    - var buttonId = 'downloadTableBtn'
+    include download-button
