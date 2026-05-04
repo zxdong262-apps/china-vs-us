@@ -134,6 +134,7 @@ export default {
     title: 'Data Sources',
     tools: 'Tools',
     project: 'Project',
+    matrix: 'Matrix Project Series',
     disclaimer: 'Data is for informational purposes only. Please verify with official sources.',
     copyright: 'All rights reserved.'
   },

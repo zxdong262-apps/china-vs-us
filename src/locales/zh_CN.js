@@ -133,6 +133,7 @@ export default {
     title: '数据来源',
     tools: '工具',
     project: '项目',
+    matrix: 'Matrix 项目系列',
     disclaimer: '数据仅供信息参考，请以官方来源为准。',
     copyright: '保留所有权利。'
   },
