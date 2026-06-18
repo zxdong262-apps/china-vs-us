@@ -34,7 +34,7 @@ const links = {
   tools: {
     electerm: {
       name: 'electerm',
-      url: 'https://electerm.html5beta.com',
+      url: 'https://electerm.org',
       description: 'Terminal/SSH/Sftp/Telnet/Serial/RDP/VNC/Spice client for Mac, Windows, and Linux'
     },
     'html5beta.com': {
